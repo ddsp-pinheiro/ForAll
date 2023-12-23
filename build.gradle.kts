@@ -2,7 +2,6 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.1"
 	id("io.spring.dependency-management") version "1.1.4"
-	id("com.vaadin") version "24.3.2"
 }
 
 group = "com"
@@ -22,14 +21,11 @@ repositories {
 	mavenCentral()
 }
 
-extra["vaadinVersion"] = "24.3.2"
-
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.vaadin:vaadin-spring-boot-starter")
 	implementation("org.springframework.kafka:spring-kafka")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.mysql:mysql-connector-j")
@@ -40,7 +36,6 @@ dependencies {
 
 dependencyManagement {
 	imports {
-		mavenBom("com.vaadin:vaadin-bom:${property("vaadinVersion")}")
 	}
 }
 

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: For All
+  datasource :
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost/user?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSl=false
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  server:
+    port: 8080
