@@ -4,8 +4,10 @@ import com.ForAll.exception.NotFoundException;
 import com.ForAll.model.UserModel;
 import com.ForAll.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,20 +26,20 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
-        UserModel user = getById(id);
+        UserModel user = getById(id).getBody();
         userRepository.delete(user);
     }
 
-    public UserModel getById(Long id){
-        return userRepository.findById(id).
-                orElseThrow(() -> new NotFoundException(IdNotFound));
-    }
+    public ResponseEntity<UserModel> getById(Long id) {
+        return userRepository.findById(id).map(response -> ResponseEntity.ok(response))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        }
 
     public List<UserModel> getAll(){
         return userRepository.findAll();
     }
 
     public Optional<UserModel> getByName(String name){
-        return userRepository.findByName(name);
+        return userRepository.findByName(name).map(response -> ResponseEntity.ok(response).getBody());
     }
 }
