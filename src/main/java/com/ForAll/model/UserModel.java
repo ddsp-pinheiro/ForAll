@@ -25,7 +25,7 @@ public class UserModel {
     private String email;
 
     @Column(name = "num_ddd", length = 3)
-    private Long ddd;
+    private String ddd;
     @Column(name = "num_tell", length = 9)
     private String tell;
 }
