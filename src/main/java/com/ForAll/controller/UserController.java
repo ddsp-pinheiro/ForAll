@@ -2,14 +2,13 @@ package com.ForAll.controller;
 
 import com.ForAll.model.UserModel;
 import com.ForAll.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -28,10 +27,14 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserModel> getById(@PathVariable Long id){
-        return ResponseEntity.ok(this.userService.getById(id));
+        return this.userService.getById(id);
+
     }
 
-
+    /* @GetMapping("/{name}")
+    public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
+        return ResponseEntity.ok(this.userService.getByName(name));
+    }*/
 
     @PostMapping
     public ResponseEntity<UserModel> postUser(@RequestBody UserModel user) {
