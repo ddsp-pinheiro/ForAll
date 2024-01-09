@@ -39,7 +39,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<UserModel> getByName(String name){
-        return userRepository.findByName(name).map(response -> ResponseEntity.ok(response).getBody());
+    public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
+        return ResponseEntity.ok(userRepository.findByNameContainingIgnoreCase(name));
     }
 }
