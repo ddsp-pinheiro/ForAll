@@ -30,17 +30,15 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    // Metodo Mostrar por ID
     public ResponseEntity<UserModel> getById(Long id) {
         return userRepository.findById(id).map(response -> ResponseEntity.ok(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
         }
-    // Metodo Mostrar todos
+
     public List<UserModel> getAll(){
         return userRepository.findAll();
     }
 
-    // Metodo Mostrar por nome
     public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
         return ResponseEntity.ok(userRepository.findByNameContainingIgnoreCase(name));
     }
