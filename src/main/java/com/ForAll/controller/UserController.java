@@ -32,8 +32,8 @@ public class UserController {
     }
 
     @GetMapping("name/{name}")
-    public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
-        return this.userService.getByName(name);
+    public ResponseEntity<List<UserModel>> getAllByName(@PathVariable String name) {
+        return this.userService.getAllByName(name);
     }
 
     @PostMapping

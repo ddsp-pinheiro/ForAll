@@ -41,7 +41,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
+    public ResponseEntity<List<UserModel>> getAllByName(@PathVariable String name) {
 
         List<UserModel> users = userRepository.findByNameContainingIgnoreCase(name);
         if (users.isEmpty()) {
