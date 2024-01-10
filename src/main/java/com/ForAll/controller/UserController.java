@@ -31,10 +31,10 @@ public class UserController {
 
     }
 
-    /* @GetMapping("/{name}")
-    public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
-        return ResponseEntity.ok(this.userService.getByName(name));
-    }*/
+    @GetMapping("name/{name}")
+    public ResponseEntity<List<UserModel>> getAllByName(@PathVariable String name) {
+        return this.userService.getAllByName(name);
+    }
 
     @PostMapping
     public ResponseEntity<UserModel> postUser(@RequestBody UserModel user) {
