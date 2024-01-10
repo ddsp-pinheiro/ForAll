@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("name/{name}")
     public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
-        return ResponseEntity.ok(this.userService.getByName(name).getBody());
+        return this.userService.getByName(name);
     }
 
     @PostMapping
