@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,5 +42,11 @@ public class UserService {
 
     public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
         return ResponseEntity.ok(userRepository.findByNameContainingIgnoreCase(name));
+    }
+
+    public ResponseEntity<UserModel> UpdateUser(UserModel user) {
+        return userRepository.findById(user.getId())
+                .map(response -> ResponseEntity.ok(userRepository.save(user)))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

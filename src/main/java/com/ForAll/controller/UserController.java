@@ -41,4 +41,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));
     }
 
+    @PutMapping
+    public ResponseEntity<UserModel> UpdateUser(@RequestBody UserModel user) {
+        return this.userService.UpdateUser(user);
+    }
+
 }
