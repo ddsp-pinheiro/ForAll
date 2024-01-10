@@ -1,32 +1,42 @@
 package com.ForAll.service;
 
-import com.ForAll.exception.NotFoundException;
 import com.ForAll.model.UserModel;
 import com.ForAll.repository.UserRepository;
-import org.apache.catalina.User;
-import org.aspectj.bridge.IMessage;
+import com.ForAll.util.MailSender;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
-import java.util.Optional;
-
 @Service
+@RequiredArgsConstructor
 public class UserService {
-
-    private static final String IdNotFound = "ID Not Found";
-    private static final String NameNotFound = "Name Not Found";
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MailSender mailSender;
+
 
     public UserModel addUser(UserModel user) {
-        return userRepository.save(user);
+        try {
+            userRepository.save(user);
+
+        } catch (Exception e) {
+            //TODO: include Exception msg
+        }
+        sendWellComeMail(user.getEmail());
+        return user;
     }
+
+    private void sendWellComeMail(String email)  {
+        mailSender.sendMail(email,
+                "Welcome to For All",
+                "src/main/java/com/ForAll/util/templates/WelcomeTemplate.html");
+    }
+
 
     public void deleteUser(Long id) {
         UserModel user = getById(id).getBody();
@@ -34,7 +44,7 @@ public class UserService {
     }
 
     public ResponseEntity<UserModel> getById(Long id) {
-        return userRepository.findById(id).map(response -> ResponseEntity.ok(response))
+        return userRepository.findById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
