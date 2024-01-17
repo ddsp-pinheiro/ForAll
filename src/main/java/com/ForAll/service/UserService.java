@@ -4,6 +4,7 @@ import com.ForAll.model.UserModel;
 import com.ForAll.repository.UserRepository;
 import com.ForAll.util.MailSender;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +59,15 @@ public class UserService {
         if (users.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else {
+            return ResponseEntity.status(HttpStatus.OK).body(users);
+        }
+    }
+
+    public ResponseEntity<List<UserModel>> getAllByEmail(@PathVariable String email){
+        List<UserModel> users = userRepository.findByEmailContainingIgnoreCase(email);
+        if (users.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else {
             return ResponseEntity.status(HttpStatus.OK).body(users);
         }
     }
