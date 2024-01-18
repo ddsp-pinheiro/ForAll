@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -32,8 +30,13 @@ public class UserController {
     }
 
     @GetMapping("name/{name}")
-    public ResponseEntity<List<UserModel>> getByName(@PathVariable String name) {
-        return ResponseEntity.ok(this.userService.getByName(name).getBody());
+    public ResponseEntity<List<UserModel>> getAllByName(@PathVariable String name) {
+        return this.userService.getAllByName(name);
+    }
+
+    @GetMapping("email/{email}")
+    public ResponseEntity<List<UserModel>> getAllByEmail(@PathVariable String email){
+        return this.userService.getAllByEmail(email);
     }
 
     @PostMapping
