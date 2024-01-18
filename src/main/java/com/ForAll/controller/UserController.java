@@ -34,6 +34,11 @@ public class UserController {
         return this.userService.getAllByName(name);
     }
 
+    @GetMapping("email/{email}")
+    public ResponseEntity<List<UserModel>> getAllByEmail(@PathVariable String email){
+        return this.userService.getAllByEmail(email);
+    }
+
     @PostMapping
     public ResponseEntity<UserModel> postUser(@RequestBody UserModel user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));

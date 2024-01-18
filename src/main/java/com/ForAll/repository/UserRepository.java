@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel,Long> {
     public List<UserModel> findByNameContainingIgnoreCase(@Param("name") String name);
+
+    public List<UserModel> findByEmailContainingIgnoreCase(@Param("email") String email);
 }
