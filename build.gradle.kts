@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation ("org.eclipse.angus:angus-mail:2.0.2")
 	implementation("org.jsoup:jsoup:1.15.3")
 	compileOnly("org.projectlombok:lombok")
